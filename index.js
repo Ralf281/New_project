@@ -32,6 +32,32 @@ app.get("/vanasõnad", (req, res)=>{
 			res.render("justlist", {h2: "Vanasõnad", listData: folkWisdom});
 		}
 	});
-
+});
+app.get("/regvisit", (req, res)=>{
+	res.render("regvisit");
+});
+	
+app.post("/regvisit", (reg, res)=>{
+	//console.log(req.body);
+	//avan txt faili selliselt, et kui seda pole olemas, luuakse
+	fs.open("public/textfiles/log.txt", "a", (err, file) => {
+		if(err){
+			throw err;
+		}
+		else {
+			fs.appendFile("public/textfiles/log.txt", req.body.
+			firstNameInput + " " req.body.lastNameInput + ";", (err)=>{
+				if(err){
+					throw err;
+				}
+				else {
+					console.log("Faili kirjutati!");
+					res.render("regvisit");
+				}
+			}
+			});
+		}
+	});
+	//res.render("regvisit");
 
 app.listen(5200);
